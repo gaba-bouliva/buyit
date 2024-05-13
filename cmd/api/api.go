@@ -61,7 +61,8 @@ func (srv *APIServer)routes() http.Handler {
 
 	mux.Mount("/api/v1", apiRouter)
 
-	userHandler := user.NewHandler()
+	userStore 	:= user.NewStore(srv.DB)
+	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(apiRouter)
 
 
